@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hilos\HiloCliente.cs" />
+    <Compile Include="Hilos\HiloServer.cs" />
+    <Compile Include="Partials\Program.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -54,7 +58,12 @@
       <Project>{A6CDC412-B660-412A-B73C-D8CC25AEE1D2}</Project>
       <Name>MensajeroModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SocketsUtils\SocketsUtils.csproj">
+      <Project>{F657081D-6E05-4950-B367-CF99D6DC44D6}</Project>
+      <Name>SocketsUtils</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

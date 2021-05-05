@@ -7,15 +7,13 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChatServerApp.Comunicacion
+namespace SocketsUtils
 {
     public class ServerSocket
     {
         private int puerto;
         private Socket servidor; //importar system.net.sockets
-        private Socket comCliente;
-        private StreamReader reader;
-        private StreamWriter writer;
+        
         //constructor que recibe puerto
         public ServerSocket(int puerto)
         {
@@ -40,49 +38,19 @@ namespace ChatServerApp.Comunicacion
         }
         //tomar el puerto
         //esperar cliente
-        public bool ObtenerCliente()
+        public ClienteSocket ObtenerCliente()        //TODO: Cambiar obtener escribir y leer a un hilo independiente.
         {
             try
             {
-                this.comCliente = this.servidor.Accept();
-                Stream stream = new NetworkStream(this.comCliente);
-                this.writer = new StreamWriter(stream);
-                this.reader = new StreamReader(stream);
-                return true;
-            }catch(Exception ex)
-            {
-                return false;
-            }
-        }
-        //escribir por el socket
-        public bool Escribir(string mensaje)
-        {
-            try
-            {
-                this.writer.WriteLine(mensaje);
-                this.writer.Flush();
-                return true;
-            }catch(Exception ex)
-            {
-                return false;
-            }
-        }
-        //leer por el socket
-        public string Leer()
-        {
-            try
-            {
-                return this.reader.ReadLine().Trim();
+                return new ClienteSocket(this.servidor.Accept());
+                
+                
             }catch(Exception ex)
             {
                 return null;
             }
         }
-        //cerrar conexion
-        public void CerrarConexion()
-        {
-            this.comCliente.Close();
-        }
+        
     }
 }
 //TOODO: Una clase library que dependiendo de parametros de constructor construya un servidor o cliente socket
